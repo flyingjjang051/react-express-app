@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, "/build")));
 app.use(history());
 
 app.get("/", (req, res) => {
-  res.send("hello voca-app");
+  res.sendFile(path.join(__dirname, "/build/index.html"));
 });
 app.post("/day/add", (req, res) => {
   db.collection("counter").findOne({ name: "count" }, (err, result) => {
@@ -108,6 +108,9 @@ app.put("/voca/:id", (req, res) => {
   db.collection("vocas").updateOne({ id: _id }, { $set: { isDone: _isDone } }, (err, result) => {
     res.json({ update: "ok" });
   });
+});
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "/build/index.html"));
 });
 
 app.listen(PORT, () => {
