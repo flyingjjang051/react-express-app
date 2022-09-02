@@ -26,9 +26,11 @@ app.use(express.static(path.join(__dirname, "/build")));
 app.use(history());
 
 app.get("/", (req, res) => {
+  console.log("aaa");
   res.sendFile(path.join(__dirname, "/build/index.html"));
 });
 app.post("/day/add", (req, res) => {
+  console.log("aaa");
   db.collection("counter").findOne({ name: "count" }, (err, result) => {
     const insertData = {
       day: req.body.day,
